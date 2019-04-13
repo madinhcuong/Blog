@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Khóa Học Lập Trình Laravel Framework 5.x Tại Khoa Phạm">
+    <meta name="author" content="">
+    <title>Admin</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/dashboard/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="/static/dashboard/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/static/dashboard/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/static/dashboard/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- DataTables CSS -->
+    <link href="/static/dashboard/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="/static/dashboard/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+    <script src="https://cloud.tinymce.com/5/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea' });</script> 
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <%- include ../layout/header %>
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Edit post
+                            <!-- <small>Add</small> -->
+                        </h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                    <div class="col-lg-7" style="padding-bottom:120px">
+                        <form action="" method="" action="">
+                            <input type="hidden" name="id" class="id" value="<% if(data && data.post){%><%= data.post.id%><%}%>"/>
+                            <div class="form-group">
+                                <label>Title</label>
+                                <input class="form-control title" name="txttitle" value="<% if(data && data.post){%><%= data.post.title%><%}%>" />
+                            </div>
+                            <div class="form-group">
+                                <label>Content</label>
+                                <textarea class="form-control" rows="3" name="txtcontent"><% if (data && data.post){%><%= data.post.content%><%}%> </textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Author</label>
+                                <input class="form-control author" name="author" value="<% if(data && data.post){%><%= data.post.author%><%}%>" />
+                            </div>
+                            <div id="signupalert" style="<%if (!data || !data.error) {%>display:none; <%}%>" class="alert alert-danger">
+                                <!-- //<p>Error:</p> -->
+                                <%if(data && data.error) {%>
+                                <span><%= data.error %></span><%}%>
+                            </div>
+
+                            <button type="button" class="btn btn-success post_edit">Edit Post</button>
+                            <button type="reset" class="btn btn-default">Reset</button>
+                            <form>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </div>
+                <!-- /#page-wrapper -->
+
+            </div>
+            <!-- /#wrapper -->
+
+            <!-- jQuery -->
+            <script src="/static/dashboard/bower_components/jquery/dist/jquery.min.js"></script>
+
+            <!-- Bootstrap Core JavaScript -->
+            <script src="/static/dashboard/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+            <!-- Metis Menu Plugin JavaScript -->
+            <script src="/static/dashboard/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+            <!-- Custom Theme JavaScript -->
+            <script src="/static/dashboard/dist/js/sb-admin-2.js"></script>
+
+            <!-- DataTables JavaScript -->
+            <script src="/static/dashboard/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+            <script src="/static/dashboard/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+            <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+            <script>
+                $(document).ready(function() {
+                    $('#dataTables-example').DataTable({
+                        responsive: true
+                    });
+                });
+            </script>
+
+            <script type="text/javascript" src="/static/js/post.js"></script>
+        </body>
+
+        </html>

@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<!-- Scripts jQuery, bootstrap -->
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
+	<!-- Estilos  bootstrap, chat-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css.css" >
+
+	<!-- área de código Firebase y lectura de Mensajes-->
+
+	<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+	<script>
+	</script>
+
+	<!-- Bootstrap Core CSS -->
+	<link href="/static/dashboard/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- MetisMenu CSS -->
+	<link href="/static/dashboard/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+	<!-- Custom CSS -->
+	<link href="/static/dashboard/dist/css/sb-admin-2.css" rel="stylesheet">
+
+	<!-- Custom Fonts -->
+	<link href="/static/dashboard/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+	<!-- DataTables CSS -->
+	<link href="/static/dashboard/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+	<!-- DataTables Responsive CSS -->
+	<link href="/static/dashboard/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+</head>
+<body>
+
+	<div class="container">
+		<ul id ="conversation">
+			
+		</ul>
+		<form>
+			<input type="text" name="message" id = "txtmessage"/>
+			<button class="bnt bnt-success" id="btn_send">Send</button>
+		</form>
+	</div>
+
+
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
+
+	<script type="text/javascript">
+		var socket = io.connect("http://localhost:3000");
+		socket.on("connect", function(){
+			console.log("user da ket noi");
+				// on la ham lang nghe su kien
+
+				//all ten 
+				var username = prompt("What your name: ");
+				socket.emit("adduser", username);
+				// trong socket.io emait la thong bao gui di
+			});
+
+				// listen up_message event
+				socket.on("up_message", function(data){
+					$('#conversation').append("<li> <b>" + data.sender + ": </b>" + data.message +"</li>");
+				});
+
+				// send message evert
+				$("#btn_send").click(function(e){
+					// get message
+					var me = $("#txtmessage").val();
+					$("#txtmessage").val("");
+					if(me.trim().length =! 0){
+						socket.emit("send_message", me);
+					}
+				});
+
+				// chong load lai form
+				$("form").submit(function(){
+					return false;
+				});
+
+				// click enter
+				$("#txtmessage").keypress(function(e){
+					if(e.which == 13){
+						$("#btn_send").trigger("click");
+					}
+
+					// e.which de so sanh ma vi ban phim chung ta deu co mot ma, enter la 13
+				});
+			</script>
+
+
+		</body>
+		</html>
