@@ -1,2 +1,2 @@
 # Blog
-blog viết bằng NodeJS
+NodeJS
